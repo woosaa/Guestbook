@@ -28,10 +28,8 @@ class ListController extends Controller {
    * Loading the data from database and order by createdAt DESC
    */
   private function loadAllEntries() {
-    $query = "SELECT * FROM entry ORDER BY createdAt DESC";
-    $stmt = $this->db->query($query);
-    $entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($entries as $entry) {
+    $result = $this->db->query('SELECT * FROM entry ORDER BY createdAt DESC');
+    while ($entry = $result->fetchArray(SQLITE3_ASSOC)) {
       $currentEntry = new GuestbookEntry();
       $currentEntry->setId($entry['ID']);
       $currentEntry->setAuthor($entry['author']);

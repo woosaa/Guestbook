@@ -35,9 +35,8 @@ class NewController extends Controller {
    * Save the new entry into database
    */
   private function saveEntry() {
-    $query = "INSERT INTO entry (title, content, author, createdAt) VALUES (:title, :content, :author, NOW())";
-    $stmt = $this->db->prepare($query);
-
+    $query = "INSERT INTO entry (title, content, author, createdAt) VALUES (:title, :content, :author, datetime('now'))";
+    $stmt = $this->db->prepare($query); 
     $stmt->bindParam(':title', $this->entry->getTitle());
     $stmt->bindParam(':content', $this->entry->getContent());
     $stmt->bindParam(':author', $this->entry->getAuthor());

@@ -1,6 +1,5 @@
 <?php
 
-require_once APP_ROOT . '/config/config.php';
 require_once APP_ROOT . '/classes/Controller.php';
 require_once APP_ROOT . '/Controller/ListController.php';
 require_once APP_ROOT . '/Controller/DetailController.php';

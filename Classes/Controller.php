@@ -10,7 +10,7 @@ abstract class Controller {
 
   /**
    * Databaselink
-   * @var PDO $db
+   * @var SQLITE3 $db
    */
   protected $db;
 
@@ -27,14 +27,10 @@ abstract class Controller {
   protected $request;
 
   public function __construct() {
-    $this->defaultController = "ListController";
+    $this->defaultController = "List";
     $this->request = new Request();
 
-    try {
-      $this->db = new PDO("mysql:host=" . CONFIG_DBHOST . ";dbname=" . CONFIG_DBNAME, CONFIG_DBUSER, CONFIG_DBPW);
-    } catch (PDOException $e) {
-      echo $e->getMessage();
-    }
+    $this->db = new SQLite3(APP_ROOT . '/Database/guestbook.db', SQLITE3_OPEN_READWRITE);
   }
 
   /**
@@ -63,10 +59,10 @@ abstract class Controller {
    * @return String $controllerName
    */
   public function getViewName() {
-    $view = $this->request->getParams()[0];
+    $view = $this->request->getParams();
     $controllerName = $this->defaultController;
-    if ($view) {
-      $controllerName = ucfirst($view);
+    if (sizeof($view) > 0) {
+      $controllerName = ucfirst($view[0]);
     }
     return $controllerName;
   }

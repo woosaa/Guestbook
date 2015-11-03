@@ -27,14 +27,12 @@ class DetailController extends Controller {
    * from $request->getParams()
    */
   private function loadEntry() {
-    $stmt = $this->db->prepare("SELECT * FROM entry WHERE ID = :id");
-
     $id = $this->request->getParams()[1]; // [0] -> view; [1] -> id ; // detail/:id
     if (is_numeric($id)) {  //Only numeric param (ID) allowed
-      $stmt->bindValue(':id', $id, PDO::PARAM_INT);
-      $stmt->execute();
-
-      $entry = $stmt->fetch(PDO::FETCH_ASSOC);
+      $stmt = $this->db->prepare('SELECT * FROM entry WHERE ID=:id;');
+      $stmt->bindValue(':id', $id, SQLITE3_INTEGER);
+      $result = $stmt->execute();
+      $entry = $result->fetchArray();
       if ($entry) {
         $currentEntry = new GuestbookEntry();
         $currentEntry->setId($entry['ID']);
