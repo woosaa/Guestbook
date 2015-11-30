@@ -1,12 +1,12 @@
 <?php
-
-require_once APP_ROOT . '/Model/GuestbookEntry.php';
-require_once APP_ROOT . '/Classes/Request.php';
+namespace Classes;
+use Interfaces\ControllerInterface;
+use Classes\Request;
 
 /**
  * Abstract Controller with basic functions
  */
-abstract class Controller {
+abstract class Controller implements ControllerInterface {
 
   /**
    * Databaselink
@@ -30,7 +30,7 @@ abstract class Controller {
     $this->defaultController = "List";
     $this->request = new Request();
 
-    $this->db = new SQLite3(APP_ROOT . '/Database/guestbook.db', SQLITE3_OPEN_READWRITE);
+    $this->db = new \SQLite3(APP_ROOT . '/Database/guestbook.db', SQLITE3_OPEN_READWRITE);
   }
 
   /**
@@ -46,7 +46,7 @@ abstract class Controller {
    * @return Controller controller
    */
   public function getViewController() {
-    $controllerName = $this->getViewName() . "Controller";
+    $controllerName = "\\Controller\\".$this->getViewName() . "Controller";
     if (class_exists($controllerName)) {
       $controller = new $controllerName();
       return $controller;

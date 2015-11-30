@@ -1,6 +1,11 @@
 <?php
 define('APP_ROOT', dirname(__FILE__));
-require_once APP_ROOT . '/Controller/Guestbook.php';
+require_once APP_ROOT . '/Classes/Autoloader.php';
+
+use Controller\Guestbook;
+use Classes\Autoloader;
+
+spl_autoload_register(array(new Autoloader(), 'loader'));
 $app = new Guestbook();
 ?>
 <!DOCTYPE html>

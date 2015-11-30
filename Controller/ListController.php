@@ -1,9 +1,14 @@
 <?php
+namespace Controller;
+
+use Classes\Controller;
+use Interfaces\ControllerInterface;
+use Model\GuestbookEntry;
 
 /**
  * Loads all entries from database and renders the list view
  */
-class ListController extends Controller {
+class ListController extends Controller implements ControllerInterface {
 
   /**
    * Contains all entries

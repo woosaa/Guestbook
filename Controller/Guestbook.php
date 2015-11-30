@@ -1,14 +1,13 @@
 <?php
+namespace Controller;
 
-require_once APP_ROOT . '/classes/Controller.php';
-require_once APP_ROOT . '/Controller/ListController.php';
-require_once APP_ROOT . '/Controller/DetailController.php';
-require_once APP_ROOT . '/Controller/NewController.php';
+use Classes\Controller;
+use Interfaces\ControllerInterface;
 
 /**
  * App Controller delegates the responsible view controller
  */
-class Guestbook extends Controller {
+class Guestbook extends Controller implements ControllerInterface  {
 
   public function __construct() {
     parent::__construct();

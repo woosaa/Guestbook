@@ -1,9 +1,13 @@
 <?php
+namespace Controller;
 
+use Model\GuestbookEntry;
+use Classes\Controller;
+use Interfaces\ControllerInterface;
 /**
  * Displays the detail view of an entry
  */
-class DetailController extends Controller {
+class DetailController extends Controller implements ControllerInterface{
 
   /**
    * @var GuestbookEntry $entry

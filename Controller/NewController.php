@@ -1,9 +1,14 @@
 <?php
+namespace Controller;
+
+use Classes\Controller;
+use Interfaces\ControllerInterface;
+use Model\GuestbookEntry;
 
 /**
  * Handles the new entry
  */
-class NewController extends Controller {
+class NewController extends Controller implements ControllerInterface {
 
   /**
    * New entry
